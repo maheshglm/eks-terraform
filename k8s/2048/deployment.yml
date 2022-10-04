@@ -5,7 +5,7 @@ metadata:
   labels:
     app: docker2048
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: docker2048
@@ -15,8 +15,8 @@ spec:
         app: docker2048
     spec:
       containers:
-        - name: docker2048
-          image: 471871787162.dkr.ecr.us-east-2.amazonaws.com/docker-2048:latest
+        - name: game
+          image: alexwhen/docker-2048:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
