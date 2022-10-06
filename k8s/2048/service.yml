@@ -5,7 +5,7 @@ metadata:
   labels:
     app: docker2048
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: docker2048
   ports:
