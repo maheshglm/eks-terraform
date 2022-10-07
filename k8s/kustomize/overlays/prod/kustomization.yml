@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+resources:
+  - namespace.yml
+
+commonLabels:
+  env: prod
+  app: docker2048
+
+patchesStrategicMerge:
+  - deployment.yml
+
+patches:
+  - patch: |-
+     - op: replace
+       path: /spec/type
+       value: LoadBalancer
+    target:
+      kind: Service
+      name: docker2048-svc
+
+
+namespace: prod
