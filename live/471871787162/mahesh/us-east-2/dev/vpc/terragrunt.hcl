@@ -7,7 +7,6 @@ locals {
   environment_name = local.environment_vars.locals.environment
   aws_account_id   = local.account_vars.locals.aws_account_id
   aws_region       = local.region_vars.locals.aws_region
-
   eks_cluster = format("%s-defaultProject-%s", local.customer_name, local.environment_name)
 }
 
