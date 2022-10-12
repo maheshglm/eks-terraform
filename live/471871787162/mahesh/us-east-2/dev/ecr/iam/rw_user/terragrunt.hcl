@@ -10,7 +10,7 @@ locals {
 }
 
 terraform {
-  source = "git@github.com:maheshglm/aws-infra.git//modules/iam_user/v5.4.0?ref=feature/build-ecr-eks-modules"
+  source = "git@github.com:maheshglm/aws-infra.git//modules/iam_user/v5.4.0"
 }
 
 include {
