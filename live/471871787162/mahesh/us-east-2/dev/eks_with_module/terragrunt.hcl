@@ -74,7 +74,7 @@ inputs = {
       desired_size = 1
 
       ami_id         = "ami-0478aafd76a8aea10" #EKS 1.22
-      instance_types = ["t3.large"]
+      instance_types = ["t2.small"]
       capacity_type  = "ON_DEMAND"
       labels         = {
         Environment = local.environment_name
