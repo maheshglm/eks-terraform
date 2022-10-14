@@ -12,7 +12,6 @@ terraform {
   source = ".//src"
 }
 
-
 dependency "eks" {
   config_path = "../../eks_with_module"
 }
@@ -20,11 +19,9 @@ dependency "eks" {
 inputs = {
   oidc_provider_issuer_url = dependency.eks.outputs.cluster_oidc_issuer_url
   oidc_provider_arn        = dependency.eks.outputs.oidc_provider_arn
-
-  s3_bucket_arn =  "arn:aws:s3:::mahesh-test-irsa"
-
-  sa_namespace = "default"
-  sa_name = "s3-irsa-test"
+  s3_bucket_arn            = "arn:aws:s3:::mahesh-test-irsa"
+  sa_namespace             = "default"
+  sa_name                  = "s3-irsa-test"
 
 
 }
