@@ -1,22 +1,7 @@
-provider "kubernetes" {
-  host                   = var.cluster_endpoint
-  cluster_ca_certificate = base64decode(var.cluster_ca)
-  token                  = var.cluster_token
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = var.cluster_endpoint
-    cluster_ca_certificate = base64decode(var.cluster_ca)
-    token                  = var.cluster_token
-  }
-}
 
 resource "helm_release" "frontend" {
-  name       = "frontend-nginx"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx"
-  version    = "13.2.10"
+  name  = "frontend"
+  chart = "/Users/maheshgummaraju/Documents/Projects/DevOps/AWS/eks-terraform/k8s/irsa-test"
 
   set {
     name = "serviceAccount.create"
@@ -25,17 +10,19 @@ resource "helm_release" "frontend" {
 
   set {
     name = "serviceAccount.name"
-    value = "s3-irsa-sa"
+    value = var.sa_name
   }
 
+  # below 2 values are important to inject service account into pod
   set {
     name = "serviceAccount.automountServiceAccountToken"
     value = true
   }
 
   set {
-    name = "service.type"
-    value = "NodePort"
+    name = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = var.s3_role_arn
   }
+
 }
 

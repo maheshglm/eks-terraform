@@ -14,10 +14,23 @@ terraform {
   source = ".//src"
 }
 
+
 include {
   path = find_in_parent_folders()
 }
 
-inputs = {
+dependency "eks" {
+  config_path = "../../eks_with_module"
+}
 
+dependency "s3_irsa" {
+  config_path = "../s3_irsa"
+}
+
+inputs = {
+  cluster_endpoint = dependency.eks.outputs.cluster_endpoint
+  cluster_ca       = dependency.eks.outputs.cluster_certificate_authority_data
+  cluster_token    = dependency.eks.outputs.cluster_token
+  s3_role_arn      = dependency.s3_irsa.outputs.s3_role_arn
+  sa_name          = "s3-irsa-test"
 }
